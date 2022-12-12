@@ -1,0 +1,8 @@
+{
+    "editor.formatOnSave": true,
+    "tsImportSorter.configuration.autoFormat": "onSave",
+    "tsImportSorter.configuration.keepUnused": [".*"],
+    "tsImportSorter.configuration.wrappingStyle": "prettier",
+    "tsImportSorter.configuration.removeLastSlashInPath": true,
+    "tsImportSorter.configuration.groupRules": [["^node:", "^[@]", {}], "^[#]", "^[.]"],
+}
