@@ -1,8 +1,14 @@
 {
     "editor.formatOnSave": true,
+    "editor.quickSuggestions": {
+        "strings": true
+    },
+    "files.associations": {
+        "*.css": "tailwindcss"
+    },
     "tsImportSorter.configuration.autoFormat": "onSave",
     "tsImportSorter.configuration.keepUnused": [".*"],
     "tsImportSorter.configuration.wrappingStyle": "prettier",
     "tsImportSorter.configuration.removeLastSlashInPath": true,
-    "tsImportSorter.configuration.groupRules": [["^node:", "^[@]", {}], "^[#]", "^[.]"],
+    "tsImportSorter.configuration.groupRules": [["^node:", "^[@]", {}], "^[#]", "^[.]"]
 }
