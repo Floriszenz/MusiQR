@@ -3,7 +3,7 @@
 
 <button
     on:click
-    class="bg-blue-500 text-white rounded-xl text-lg px-6 font-semibold py-3 hover:scale-105 transition-transform"
+    class="rounded-xl bg-blue-500 px-6 py-3 text-lg font-semibold text-white transition-transform hover:scale-105"
 >
     <slot />
 </button>
