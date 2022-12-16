@@ -41,11 +41,18 @@
 
                     // TODO: Handle case of multiple detected codes
                     const result = results[0];
-                    const { x, y, width, height } = result.boundingBox;
+                    const [topLeft, topRight, bottomRight, bottomLeft] = result.cornerPoints;
 
                     ctx.strokeStyle = "red";
                     ctx.lineWidth = 4;
-                    ctx.strokeRect(x, y, width, height);
+
+                    ctx.beginPath();
+                    ctx.moveTo(topLeft.x, topLeft.y);
+                    ctx.lineTo(topRight.x, topRight.y);
+                    ctx.lineTo(bottomRight.x, bottomRight.y);
+                    ctx.lineTo(bottomLeft.x, bottomLeft.y);
+                    ctx.closePath();
+                    ctx.stroke();
                 } catch {
                     // TODO: Sensible fallback logic
                     alert("Could not detect any QR code");
@@ -70,10 +77,12 @@
     class="flex h-screen w-full flex-col items-center justify-between gap-4"
 >
     <canvas bind:this={canvas} class="absolute -z-10" />
-    <header class="bg-black/50 w-full p-2 text-white">
+    <header class="bg-black/50 w-full p-2 text-white backdrop-blur-md shadow-md">
         <button on:click={goBack}>Back</button>
     </header>
-    <main class="bg-black/50 w-full p-2 text-white flex flex-row justify-center">
+    <main
+        class="bg-black/50 w-full p-2 text-white backdrop-blur-md shadow-[0_-4px_6px_-1px_rgba(0,0,0,0.1),0_-2px_4px_-2px_rgba(0,0,0,0.1)] flex flex-row justify-center"
+    >
         <button on:click={onScanClick}>Scan</button>
     </main>
 </div>
