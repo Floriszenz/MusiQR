@@ -4,6 +4,7 @@ specifiers:
   '@sveltejs/adapter-auto': 1.0.0
   '@sveltejs/kit': 1.0.0
   autoprefixer: 10.4.13
+  browser-fs-access: ^0.31.1
   postcss: 8.4.20
   prettier: 2.8.1
   prettier-plugin-svelte: 2.9.0
@@ -14,6 +15,9 @@ specifiers:
   tslib: 2.4.1
   typescript: 4.9.4
   vite: 4.0.1
+
+dependencies:
+  browser-fs-access: 0.31.1
 
 devDependencies:
   '@sveltejs/adapter-auto': 1.0.0_@sveltejs+kit@1.0.0
@@ -414,6 +418,10 @@ packages:
     dependencies:
       fill-range: 7.0.1
     dev: true
+
+  /browser-fs-access/0.31.1:
+    resolution: {integrity: sha512-jMz9f56DkLM7LyA8wZYO7CtpoF3RdUk1/FXrnRNybgV0R5eqk/fgFWR0k5IMjPYgK4jmZecytP/UDO5WBi9Dhg==}
+    dev: false
 
   /browserslist/4.21.4:
     resolution: {integrity: sha512-CBHJJdDmgjl3daYjN5Cp5kbTf1mUhZoS+beLklHIvkOWscs83YAhLlF3Wsh/lciQYAcbBJgTOD44VtG31ZM4Hw==}

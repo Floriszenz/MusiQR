@@ -1,10 +1,27 @@
 <script lang="ts">
+    import { fileOpen } from "browser-fs-access";
+
+    import { goto } from "$app/navigation";
     import Button from "$lib/components/Button.svelte";
+    import { uploadedImage } from "$lib/stores";
 
     function onScanClick() {}
 
-    function onUploadClick() {
-        console.log("Clicked on upload button");
+    async function onUploadClick() {
+        try {
+            const image = await fileOpen({
+                id: "musiqr-upload",
+                description: "Image files",
+                excludeAcceptAllOption: true,
+                mimeTypes: ["image/*"],
+                multiple: false,
+                startIn: "pictures",
+            });
+
+            $uploadedImage = image;
+
+            await goto("/scan");
+        } catch {}
     }
 </script>
 
