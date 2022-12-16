@@ -18,7 +18,7 @@
                 startIn: "pictures",
             });
 
-            $uploadedImage = image;
+            $uploadedImage = await createImageBitmap(image);
 
             await goto("/scan");
         } catch {}
@@ -30,9 +30,9 @@
 </svelte:head>
 
 <main
-    class="w-full h-screen flex flex-col gap-4 justify-center items-center bg-gradient-to-b from-slate-50 to-slate-400"
+    class="flex h-screen w-full flex-col items-center justify-center gap-4 bg-gradient-to-b from-slate-50 to-slate-400"
 >
-    <h1 class="text-4xl mb-8">MusiQR</h1>
+    <h1 class="mb-8 text-4xl">MusiQR</h1>
     <Button on:click={onScanClick}>Scan with camera</Button>
     <Button on:click={onUploadClick}>Upload image</Button>
 </main>

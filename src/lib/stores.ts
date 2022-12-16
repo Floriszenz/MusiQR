@@ -1,3 +1,3 @@
 import { writable } from "svelte/store";
 
-export const uploadedImage = writable<Blob>();
+export const uploadedImage = writable<ImageBitmap>();
