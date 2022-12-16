@@ -1,8 +1,10 @@
 <script lang="ts">
-    import { goto } from "$app/navigation";
-    import { uploadedImage } from "$lib/stores";
     import { onDestroy, onMount } from "svelte";
+    import { goto } from "$app/navigation";
+    import { initBarcodeDetector, type BarcodeDetector } from "$lib/BarcodeDetector";
+    import { uploadedImage } from "$lib/stores";
 
+    let detector: BarcodeDetector;
     let contentContainer: HTMLElement;
     let contentResizeObserver: ResizeObserver;
     let canvas: HTMLCanvasElement;
@@ -16,17 +18,38 @@
         console.log("Clicked scan button");
     }
 
-    onMount(() => {
+    onMount(async () => {
         if (!$uploadedImage) {
             goBack();
         } else {
-            contentResizeObserver = new ResizeObserver(([entry]) => {
+            const BarcodeDetector = await initBarcodeDetector();
+            detector = new BarcodeDetector();
+
+            contentResizeObserver = new ResizeObserver(async ([entry]) => {
                 const { contentRect } = entry;
 
                 canvas.width = contentRect.width;
                 canvas.height = contentRect.height;
 
                 ctx.drawImage($uploadedImage, 0, 0, canvas.width, canvas.height);
+
+                // Try to detect QR code
+                try {
+                    const results = await detector.detect(canvas);
+
+                    if (results.length === 0) throw new Error("No QR code detected");
+
+                    // TODO: Handle case of multiple detected codes
+                    const result = results[0];
+                    const { x, y, width, height } = result.boundingBox;
+
+                    ctx.strokeStyle = "red";
+                    ctx.lineWidth = 4;
+                    ctx.strokeRect(x, y, width, height);
+                } catch {
+                    // TODO: Sensible fallback logic
+                    alert("Could not detect any QR code");
+                }
             });
 
             contentResizeObserver.observe(contentContainer);

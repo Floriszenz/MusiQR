@@ -28,6 +28,7 @@
         "vite": "4.0.1"
     },
     "dependencies": {
+        "@undecaf/barcode-detector-polyfill": "0.9.14",
         "browser-fs-access": "0.31.1"
     }
 }

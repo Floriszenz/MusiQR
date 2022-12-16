@@ -3,8 +3,9 @@ lockfileVersion: 5.4
 specifiers:
   '@sveltejs/adapter-auto': 1.0.0
   '@sveltejs/kit': 1.0.0
+  '@undecaf/barcode-detector-polyfill': 0.9.14
   autoprefixer: 10.4.13
-  browser-fs-access: ^0.31.1
+  browser-fs-access: 0.31.1
   postcss: 8.4.20
   prettier: 2.8.1
   prettier-plugin-svelte: 2.9.0
@@ -17,6 +18,7 @@ specifiers:
   vite: 4.0.1
 
 dependencies:
+  '@undecaf/barcode-detector-polyfill': 0.9.14
   browser-fs-access: 0.31.1
 
 devDependencies:
@@ -348,6 +350,16 @@ packages:
     dependencies:
       '@types/node': 18.11.13
     dev: true
+
+  /@undecaf/barcode-detector-polyfill/0.9.14:
+    resolution: {integrity: sha512-rBghWcIUF4bBSvPAiGbtJFaDwWH7z8nto+DbEuMbckduI9CuXfurrUh3HHCM5TIl1ySsFEgb3sHqxemsyYgMgA==}
+    dependencies:
+      '@undecaf/zbar-wasm': 0.9.11
+    dev: false
+
+  /@undecaf/zbar-wasm/0.9.11:
+    resolution: {integrity: sha512-R73AbCWeKAmwuldXGOvklgspHlPHAEXlU7qOz9wUgrNSfHTeffayDL86XP9lYuqwASHT1MBiu2qCXSuL3o8t8A==}
+    dev: false
 
   /acorn-node/1.8.2:
     resolution: {integrity: sha512-8mt+fslDufLYntIoPAaIMUe/lrbrehIiwmR3t2k9LljIzoigEPF27eLk2hy8zSGzmR/ogr7zbRKINMo1u0yh5A==}
