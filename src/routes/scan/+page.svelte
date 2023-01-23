@@ -3,19 +3,44 @@
     import { goto } from "$app/navigation";
     import { initBarcodeDetector, type BarcodeDetector } from "$lib/BarcodeDetector";
     import { uploadedImage } from "$lib/stores";
+    import {
+        generateMusic,
+        isMusiQRCode,
+        MusiQRSong,
+        startMusic,
+        stopMusic,
+    } from "$lib/music-generation";
 
     let detector: BarcodeDetector;
     let contentContainer: HTMLElement;
     let contentResizeObserver: ResizeObserver;
     let canvas: HTMLCanvasElement;
     let ctx: CanvasRenderingContext2D;
+    let musiQrCode: string;
+    let isGenerated: boolean = false;
+    let isPlaying: boolean = false;
 
     function goBack() {
         return goto("/", { replaceState: true });
     }
 
     function onScanClick() {
-        console.log("Clicked scan button");
+        const song = MusiQRSong.fromMusiQRCode(musiQrCode);
+
+        console.log({ song });
+
+        generateMusic(song);
+        isGenerated = true;
+    }
+
+    function onPlayClick() {
+        if (isPlaying) {
+            stopMusic();
+        } else {
+            startMusic();
+        }
+
+        isPlaying = !isPlaying;
     }
 
     onMount(async () => {
@@ -42,6 +67,10 @@
                     // TODO: Handle case of multiple detected codes
                     const result = results[0];
                     const [topLeft, topRight, bottomRight, bottomLeft] = result.cornerPoints;
+
+                    if (isMusiQRCode(result.rawValue)) {
+                        musiQrCode = result.rawValue;
+                    }
 
                     ctx.strokeStyle = "red";
                     ctx.lineWidth = 4;
@@ -83,6 +112,10 @@
     <main
         class="bg-black/50 w-full p-2 text-white backdrop-blur-md shadow-[0_-4px_6px_-1px_rgba(0,0,0,0.1),0_-2px_4px_-2px_rgba(0,0,0,0.1)] flex flex-row justify-center"
     >
-        <button on:click={onScanClick}>Scan</button>
+        {#if isGenerated}
+            <button on:click={onPlayClick}>{isPlaying ? "Pause" : "Play"}</button>
+        {:else}
+            <button on:click={onScanClick}>Scan</button>
+        {/if}
     </main>
 </div>
