@@ -181,3 +181,8 @@ export function startMusic() {
 export function stopMusic() {
     Tone.Transport.pause();
 }
+
+export function clearMusic() {
+    Tone.Transport.stop();
+    Tone.Transport.cancel();
+}

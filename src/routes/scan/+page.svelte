@@ -4,6 +4,7 @@
     import { initBarcodeDetector, type BarcodeDetector } from "$lib/BarcodeDetector";
     import { uploadedImage } from "$lib/stores";
     import {
+        clearMusic,
         generateMusic,
         isMusiQRCode,
         MusiQRSong,
@@ -98,6 +99,8 @@
         if (contentResizeObserver) {
             contentResizeObserver.disconnect();
         }
+
+        clearMusic();
     });
 </script>
 
