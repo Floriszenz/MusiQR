@@ -1,3 +1,11 @@
+import PianoA4 from "$lib/assets/instruments/piano/A4.ogg";
+import PianoB4 from "$lib/assets/instruments/piano/B4.ogg";
+import PianoC4 from "$lib/assets/instruments/piano/C4.ogg";
+import PianoC5 from "$lib/assets/instruments/piano/C5.ogg";
+import PianoD4 from "$lib/assets/instruments/piano/D4.ogg";
+import PianoE4 from "$lib/assets/instruments/piano/E4.ogg";
+import PianoF4 from "$lib/assets/instruments/piano/F4.ogg";
+import PianoG4 from "$lib/assets/instruments/piano/G4.ogg";
 import * as Tone from "tone";
 
 const MUSIQR_CODE_REGEX = /^web\+mqr:\/\/(?<bpm>\d{3})-(?<instrument>\d{3})-(?<notes>(?:\d{3})+)$/;
@@ -123,17 +131,32 @@ class Note {
 function chooseInstrument(instrumentId: number) {
     switch (instrumentId) {
         case 0:
-            return Tone.Synth;
+            return new Tone.Synth({ volume: -5 }).toDestination();
+        case 1:
+            return new Tone.Sampler({
+                urls: {
+                    C4: PianoC4,
+                    D4: PianoD4,
+                    E4: PianoE4,
+                    F4: PianoF4,
+                    G4: PianoG4,
+                    A4: PianoA4,
+                    B4: PianoB4,
+                    C5: PianoC5,
+                },
+                volume: -5,
+            }).toDestination();
         default:
-            return Tone.Synth;
+            return new Tone.Synth({ volume: -5 }).toDestination();
     }
 }
 
-export function generateMusic(song: MusiQRSong) {
-    const Instrument = chooseInstrument(song.instrument);
-    const synth = new Instrument({ volume: -10 }).toDestination();
+export async function generateMusic(song: MusiQRSong) {
+    const instrument = chooseInstrument(song.instrument);
     let time = 0;
     const chords = [];
+
+    await Tone.loaded();
 
     for (const note of song.notes) {
         chords.push({ note: note.pitch, duration: note.length, time });
@@ -141,7 +164,7 @@ export function generateMusic(song: MusiQRSong) {
     }
 
     new Tone.Part((time, { note, duration }) => {
-        synth.triggerAttackRelease(note, duration, time);
+        instrument.triggerAttackRelease(note, duration, time);
     }, chords).start(0);
 
     Tone.Transport.bpm.value = song.bpm;

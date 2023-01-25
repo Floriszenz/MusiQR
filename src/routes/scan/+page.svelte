@@ -24,12 +24,12 @@
         return goto("/", { replaceState: true });
     }
 
-    function onScanClick() {
+    async function onScanClick() {
         const song = MusiQRSong.fromMusiQRCode(musiQrCode);
 
         console.log({ song });
 
-        generateMusic(song);
+        await generateMusic(song);
         isGenerated = true;
     }
 
