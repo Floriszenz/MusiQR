@@ -163,9 +163,13 @@ export async function generateMusic(song: MusiQRSong) {
         time += Tone.Time(note.length).toSeconds();
     }
 
-    new Tone.Part((time, { note, duration }) => {
+    let part = new Tone.Part((time, { note, duration }) => {
         instrument.triggerAttackRelease(note, duration, time);
     }, chords).start(0);
+
+    part.loop = true;
+    part.loopStart = 0;
+    part.loopEnd = time;
 
     Tone.Transport.bpm.value = song.bpm;
 }
@@ -175,5 +179,5 @@ export function startMusic() {
 }
 
 export function stopMusic() {
-    Tone.Transport.stop();
+    Tone.Transport.pause();
 }
