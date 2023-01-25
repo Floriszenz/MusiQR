@@ -1,3 +1,11 @@
+import GuitarAcousticA4 from "$lib/assets/instruments/guitar-acoustic/A4.ogg";
+import GuitarAcousticB4 from "$lib/assets/instruments/guitar-acoustic/B4.ogg";
+import GuitarAcousticC4 from "$lib/assets/instruments/guitar-acoustic/C4.ogg";
+import GuitarAcousticC5 from "$lib/assets/instruments/guitar-acoustic/C5.ogg";
+import GuitarAcousticD4 from "$lib/assets/instruments/guitar-acoustic/D4.ogg";
+import GuitarAcousticE4 from "$lib/assets/instruments/guitar-acoustic/E4.ogg";
+import GuitarAcousticF4 from "$lib/assets/instruments/guitar-acoustic/F4.ogg";
+import GuitarAcousticG4 from "$lib/assets/instruments/guitar-acoustic/G4.ogg";
 import PianoA4 from "$lib/assets/instruments/piano/A4.ogg";
 import PianoB4 from "$lib/assets/instruments/piano/B4.ogg";
 import PianoC4 from "$lib/assets/instruments/piano/C4.ogg";
@@ -143,6 +151,20 @@ function chooseInstrument(instrumentId: number) {
                     A4: PianoA4,
                     B4: PianoB4,
                     C5: PianoC5,
+                },
+                volume: -5,
+            }).toDestination();
+        case 2:
+            return new Tone.Sampler({
+                urls: {
+                    C4: GuitarAcousticC4,
+                    D4: GuitarAcousticD4,
+                    E4: GuitarAcousticE4,
+                    F4: GuitarAcousticF4,
+                    G4: GuitarAcousticG4,
+                    A4: GuitarAcousticA4,
+                    B4: GuitarAcousticB4,
+                    C5: GuitarAcousticC5,
                 },
                 volume: -5,
             }).toDestination();
