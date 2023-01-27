@@ -5,7 +5,9 @@
     import Button from "$lib/components/Button.svelte";
     import { uploadedImage } from "$lib/stores";
 
-    function onScanClick() {}
+    async function onScanClick() {
+        await goto("/video");
+    }
 
     async function onUploadClick() {
         try {
