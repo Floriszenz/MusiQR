@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { onDestroy } from "svelte";
+    import { onDestroy, onMount } from "svelte";
     import { goto } from "$app/navigation";
     import { scannedImage } from "$lib/stores";
     import { clearMusic, startMusic, stopMusic } from "$lib/music-generation";
@@ -22,6 +22,12 @@
 
         isPlaying = !isPlaying;
     }
+
+    onMount(async () => {
+        if (!$scannedImage) {
+            goBack();
+        }
+    });
 
     onDestroy(() => {
         clearMusic();
