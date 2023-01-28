@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<svg viewBox="250 255 210 215"
+    xmlns="http://www.w3.org/2000/svg"
+    xmlns:bx="https://boxy-svg.com">
+    <g transform="matrix(1, 0, 0, 1, 250, 200)">
+        <rect y="205" width="60" height="60" style="fill: none; stroke: rgb(255, 255, 255); stroke-width: 10px; stroke-linejoin: round;" x="5"/>
+        <rect style="stroke-linejoin: round; fill: rgb(255, 255, 255)" x="20" y="220" width="30" height="30" rx="5" ry="5"/>
+    </g>
+    <g transform="matrix(1, 0, 0, 1, 390, 200)">
+        <rect y="205" width="60" height="60" style="fill: none; stroke: rgb(255, 255, 255); stroke-width: 10px; stroke-linejoin: round;" x="5"/>
+        <rect style="stroke-linejoin: round; fill: rgb(255, 255, 255)" x="20" y="220" width="30" height="30" rx="5" ry="5"/>
+    </g>
+    <g transform="matrix(1, 0, 0, 1, 250, 200)">
+        <path style="fill: rgb(255, 255, 255)" d="M 83 200 H 90 V 210 H 83 A 3 3 0 0 1 80 207 V 203 A 3 3 0 0 1 83 200 Z" bx:shape="rect 80 200 10 10 3 0 0 3 1@43022f55"/>
+        <path style="fill: rgb(255, 255, 255)" d="M 89 200 H 97 A 3 3 0 0 1 100 203 V 211 H 92 A 3 3 0 0 1 89 208 V 200 Z" bx:shape="rect 89 200 11 11 0 3 0 3 1@1e24cc7a"/>
+        <path style="fill: rgb(255, 255, 255)" d="M 123 200 H 127 A 3 3 0 0 1 130 203 V 210 H 120 V 203 A 3 3 0 0 1 123 200 Z" bx:shape="rect 120 200 10 10 3 3 0 0 1@3b3eaf47"/>
+        <path style="fill: rgb(255, 255, 255)" d="M 90 210 H 100 V 217 A 3 3 0 0 1 97 220 H 93 A 3 3 0 0 1 90 217 V 210 Z" bx:shape="rect 90 210 10 10 0 0 3 3 1@df82f573"/>
+        <rect style="fill: rgb(255, 255, 255)" x="120" y="209" width="10" height="12"/>
+        <path style="fill: rgb(255, 255, 255)" d="M 83 220 H 87 A 3 3 0 0 1 90 223 V 230 H 80 V 223 A 3 3 0 0 1 83 220 Z" bx:shape="rect 80 220 10 10 3 3 0 0 1@c99d59f5"/>
+        <rect style="fill: rgb(255, 255, 255)" x="100" y="220" width="10" height="10" rx="3" ry="3"/>
+        <path style="fill: rgb(255, 255, 255)" d="M 120 220 H 130 V 227 A 3 3 0 0 1 127 230 H 123 A 3 3 0 0 1 120 227 V 220 Z" bx:shape="rect 120 220 10 10 0 0 3 3 1@897d7e8c"/>
+        <rect style="fill: rgb(255, 255, 255)" x="80" y="229" width="10" height="12"/>
+        <rect style="fill: rgb(255, 255, 255)" x="110" y="230" width="10" height="10" rx="3" ry="3"/>
+        <path style="fill: rgb(255, 255, 255)" d="M 80 240 H 90 V 250 H 83 A 3 3 0 0 1 80 247 V 240 Z" bx:shape="rect 80 240 10 10 0 0 0 3 1@9559a05d"/>
+        <rect style="fill: rgb(255, 255, 255)" x="89" y="240" width="12" height="10"/>
+        <path style="fill: rgb(255, 255, 255)" d="M 100 240 H 107 A 3 3 0 0 1 110 243 V 247 A 3 3 0 0 1 107 250 H 100 V 240 Z" bx:shape="rect 100 240 10 10 0 3 3 0 1@a26d0ec8"/>
+        <rect style="fill: rgb(255, 255, 255)" x="80" y="260" width="10" height="10" rx="3" ry="3"/>
+        <rect style="fill: rgb(255, 255, 255)" x="100" y="260" width="10" height="10" rx="3" ry="3"/>
+        <rect style="fill: rgb(255, 255, 255)" x="120" y="260" width="10" height="10" rx="3" ry="3"/>
+    </g>
+    <path style="fill: rgb(255, 255, 255)" d="M 310 255 H 320 V 405 H 300 V 265 A 10 10 0 0 1 310 255 Z" bx:shape="rect 300 255 20 150 10 0 0 0 1@afe99468"/>
+    <path style="fill: rgb(255, 255, 255)" d="M 440 255 H 450 A 10 10 0 0 1 460 265 V 405 H 440 V 255 Z" bx:shape="rect 440 255 20 150 0 10 0 0 1@c3208a4e"/>
+    <rect width="122" height="20" style="fill: rgb(255, 255, 255)" x="319" y="255"/>
+    <rect y="295" width="122" height="20" style="fill: rgb(255, 255, 255)" x="319"/>
+</svg>

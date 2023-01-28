@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<svg viewBox="220 255 260 240"
+    xmlns="http://www.w3.org/2000/svg"
+    xmlns:bx="https://boxy-svg.com">
+    <g transform="matrix(1, 0, 0, 1, 250, 200)">
+        <rect y="205" width="80" height="80" style="fill: none; stroke: rgb(0, 0, 0); stroke-width: 20px; stroke-linejoin: round;" x="-20"/>
+        <rect style="stroke-linejoin: round; fill: rgb(0, 0, 0)" x="0" y="225" width="40" height="40" rx="8" ry="8"/>
+    </g>
+    <g transform="matrix(1, 0, 0, 1, 390, 200)">
+        <rect y="205" width="80" height="80" style="fill: none; stroke: rgb(0, 0, 0); stroke-width: 20px; stroke-linejoin: round;" x="-20"/>
+        <rect style="stroke-linejoin: round; fill: rgb(0, 0, 0)" x="0" y="225" width="40" height="40" rx="8" ry="8"/>
+    </g>
+    <path style="fill: rgb(0, 0, 0)" d="M 310 255 H 320 V 405 H 300 V 265 A 10 10 0 0 1 310 255 Z" bx:shape="rect 300 255 20 150 10 0 0 0 1@afe99468"/>
+    <path style="fill: rgb(0, 0, 0)" d="M 440 255 H 450 A 10 10 0 0 1 460 265 V 405 H 440 V 255 Z" bx:shape="rect 440 255 20 150 0 10 0 0 1@c3208a4e"/>
+    <rect width="122" height="20" style="fill: rgb(0, 0, 0)" x="319" y="255"/>
+    <rect y="295" width="122" height="20" style="fill: rgb(0, 0, 0)" x="319"/>
+</svg>

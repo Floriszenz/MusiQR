@@ -34,7 +34,12 @@
 <main
     class="flex h-screen w-full flex-col items-center justify-center gap-4 bg-gradient-to-b from-slate-50 to-slate-400"
 >
-    <h1 class="mb-8 text-4xl">MusiQR</h1>
+    <img
+        src="/logo-black.svg"
+        alt="Logo of MusiQR; A sixteenth note combined with a QR code"
+        class="w-1/2"
+    />
+    <h1 class="mb-12 text-5xl">MusiQR</h1>
     <Button on:click={onScanClick}>Scan with camera</Button>
     <Button on:click={onUploadClick}>Upload image</Button>
 </main>
