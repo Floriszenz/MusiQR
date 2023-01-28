@@ -37,7 +37,7 @@
     <img
         src="/logo-black.svg"
         alt="Logo of MusiQR; A sixteenth note combined with a QR code"
-        class="w-1/2"
+        class="w-1/2 max-w-xs"
     />
     <h1 class="mb-12 text-5xl">MusiQR</h1>
     <Button on:click={onScanClick}>Scan with camera</Button>
