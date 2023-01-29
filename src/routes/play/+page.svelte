@@ -1,8 +1,16 @@
 <script lang="ts">
     import { onDestroy, onMount } from "svelte";
     import { goto } from "$app/navigation";
+    import { page } from "$app/stores";
     import { scannedImage } from "$lib/stores";
-    import { clearMusic, startMusic, stopMusic } from "$lib/music-generation";
+    import {
+        clearMusic,
+        generateMusic,
+        isMusiQRCode,
+        MusiQRSong,
+        startMusic,
+        stopMusic,
+    } from "$lib/music-generation";
     import PlayButton from "$lib/components/PlayButton.svelte";
     import BackButton from "$lib/components/BackButton.svelte";
 
@@ -27,7 +35,15 @@
 
     onMount(async () => {
         if (!$scannedImage) {
-            goBack();
+            const songParam = $page.url.searchParams.get("song");
+
+            if (songParam && isMusiQRCode(songParam)) {
+                const song = MusiQRSong.fromMusiQRCode(songParam);
+
+                await generateMusic(song);
+            } else {
+                goBack();
+            }
         }
     });
 
@@ -39,16 +55,9 @@
 <div
     bind:clientWidth={contentWidth}
     bind:clientHeight={contentHeight}
-    class="flex h-screen w-full flex-col items-center justify-between gap-4"
+    class="flex h-screen w-full flex-col items-center justify-between gap-4 bg-gradient-to-b from-slate-50 to-slate-400"
 >
-    <img
-        src={$scannedImage}
-        alt=""
-        class="absolute -z-10"
-        width={contentWidth}
-        height={contentHeight}
-    />
-    <header class="w-full min-h-[2rem] relative text-white">
+    <header class="w-full min-h-[2rem] relative z-10 text-white">
         <div
             id="bg-top"
             class="[clip-path:url(#clipping-top)] w-full h-full absolute bg-black/50 backdrop-blur-md shadow-md"
@@ -57,6 +66,23 @@
             <BackButton on:click={goBack} />
         </div>
     </header>
+    {#if $scannedImage}
+        <img
+            src={$scannedImage}
+            alt=""
+            class="absolute"
+            width={contentWidth}
+            height={contentHeight}
+        />
+    {:else}
+        <img
+            src="/logo-black.svg"
+            alt="Logo of MusiQR; A sixteenth note combined with a QR code"
+            class="w-1/2 max-w-xs invert drop-shadow-[0px_0px_1px_#AAA]"
+            width={contentWidth}
+            height={contentHeight}
+        />
+    {/if}
     <main class="w-full min-h-[4rem] flex flex-row justify-center text-white">
         <div
             id="bg-bottom"

@@ -16,7 +16,8 @@ import PianoF4 from "$lib/assets/instruments/piano/F4.ogg";
 import PianoG4 from "$lib/assets/instruments/piano/G4.ogg";
 import * as Tone from "tone";
 
-const MUSIQR_CODE_REGEX = /^web\+mqr:\/\/(?<bpm>\d{3})-(?<instrument>\d{3})-(?<notes>(?:\d{3})+)$/;
+const MUSIQR_CODE_REGEX =
+    /^web\+mqr:\/\/(?<bpm>\d{3})-(?<instrument>\d{3})-(?<notes>(?:\d{3})+)\/?$/;
 
 export function isMusiQRCode(text: string): boolean {
     return MUSIQR_CODE_REGEX.test(text);
@@ -205,6 +206,7 @@ export function stopMusic() {
 }
 
 export function clearMusic() {
-    Tone.Transport.stop();
-    Tone.Transport.cancel();
+    // These functions might be undefined when using the protocol handler and an initial component unmount happens
+    Tone.Transport.stop?.();
+    Tone.Transport.cancel?.();
 }
