@@ -198,6 +198,10 @@ export async function generateMusic(song: MusiQRSong) {
 }
 
 export function startMusic() {
+    if (Tone.Transport.context.state === "suspended") {
+        Tone.Transport.context.resume();
+    }
+
     Tone.Transport.start();
 }
 
@@ -207,6 +211,6 @@ export function stopMusic() {
 
 export function clearMusic() {
     // These functions might be undefined when using the protocol handler and an initial component unmount happens
-    Tone.Transport.stop?.();
-    Tone.Transport.cancel?.();
+    Tone.Transport?.stop?.();
+    Tone.Transport?.cancel?.();
 }
