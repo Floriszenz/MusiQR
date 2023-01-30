@@ -38,7 +38,25 @@
 
             ctx = canvas.getContext("2d")!;
 
-            ctx.drawImage($uploadedImage, 0, 0, canvas.width, canvas.height);
+            const scaleFactor = { x: 1, y: 1 };
+            const imageAspectRatio = $uploadedImage.width / $uploadedImage.height;
+            const canvasAspectRatio = canvas.width / canvas.height;
+            const aspectRatio = imageAspectRatio / canvasAspectRatio;
+
+            if (aspectRatio > 1) {
+                scaleFactor.y /= aspectRatio;
+            } else {
+                scaleFactor.x *= aspectRatio;
+            }
+
+            const size = {
+                x: 0.5 * canvas.width * (1 - scaleFactor.x),
+                y: 0.5 * canvas.height * (1 - scaleFactor.y),
+                width: canvas.width * scaleFactor.x,
+                height: canvas.height * scaleFactor.y,
+            };
+
+            ctx.drawImage($uploadedImage, size.x, size.y, size.width, size.height);
 
             // Try to detect QR code
             try {
@@ -75,10 +93,9 @@
 <div
     bind:clientWidth={contentWidth}
     bind:clientHeight={contentHeight}
-    class="flex h-screen w-full flex-col items-center justify-between gap-4"
+    class="flex h-screen w-full flex-col items-center justify-between gap-4 bg-gradient-to-b from-slate-50 to-slate-400"
 >
-    <canvas bind:this={canvas} class="absolute -z-10" width={contentWidth} height={contentHeight} />
-    <header class="w-full min-h-[2rem] relative text-white">
+    <header class="w-full min-h-[2rem] relative z-10 text-white">
         <div
             id="bg-top"
             class="[clip-path:url(#clipping-top)] w-full h-full absolute bg-black/50 backdrop-blur-md shadow-md"
@@ -87,6 +104,7 @@
             <BackButton on:click={goBack} />
         </div>
     </header>
+    <canvas bind:this={canvas} class="absolute" width={contentWidth} height={contentHeight} />
     <main class="w-full min-h-[4rem] flex flex-row justify-center text-white">
         <div
             id="bg-bottom"
