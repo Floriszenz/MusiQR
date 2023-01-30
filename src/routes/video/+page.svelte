@@ -2,7 +2,7 @@
     import { onMount } from "svelte";
     import { goto } from "$app/navigation";
     import { initBarcodeDetector, type BarcodeDetector } from "$lib/BarcodeDetector";
-    import { scannedImage } from "$lib/stores";
+    import { metronome, scannedImage } from "$lib/stores";
     import { generateMusic, isMusiQRCode, MusiQRSong } from "$lib/music-generation";
     import BackButton from "$lib/components/BackButton.svelte";
     import ScanButton from "$lib/components/ScanButton.svelte";
@@ -34,7 +34,7 @@
 
         const song = MusiQRSong.fromMusiQRCode(musiQrCode);
 
-        await generateMusic(song);
+        $metronome = await generateMusic(song);
 
         cancelAnimationFrame(animationHandle);
         video.pause();

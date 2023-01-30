@@ -2,7 +2,7 @@
     import { onDestroy, onMount } from "svelte";
     import { goto } from "$app/navigation";
     import { page } from "$app/stores";
-    import { scannedImage } from "$lib/stores";
+    import { metronome, scannedImage } from "$lib/stores";
     import {
         clearMusic,
         generateMusic,
@@ -15,6 +15,8 @@
     import BackButton from "$lib/components/BackButton.svelte";
 
     let isPlaying: boolean = false;
+    let songProgress: number = 0;
+    let resetProgress: boolean = false;
 
     let contentWidth: number;
     let contentHeight: number;
@@ -25,8 +27,17 @@
 
     function onPlayClick() {
         if (isPlaying) {
+            $metronome.stop();
             stopMusic();
         } else {
+            $metronome.start((progress) => {
+                if (progress < 0.5) {
+                    resetProgress = songProgress > 90;
+                    songProgress = 100 * (0.42 / 0.5) * progress;
+                } else {
+                    songProgress = 100 * ((0.42 / 0.5) * progress + 0.17);
+                }
+            });
             startMusic();
         }
 
@@ -83,10 +94,17 @@
             height={contentHeight}
         />
     {/if}
-    <main class="w-full min-h-[4rem] flex flex-row justify-center text-white">
+    <main class="w-full min-h-[4rem] flex flex-row justify-center relative text-white">
         <div
             id="bg-bottom"
             class="[clip-path:url(#clipping-bottom)] w-full h-full bg-black/50 backdrop-blur-md shadow-[0_-4px_6px_-1px_rgba(0,0,0,0.1),0_-2px_4px_-2px_rgba(0,0,0,0.1)]"
+        />
+        <div
+            id="progress"
+            style="--progress:{songProgress}%"
+            class="[clip-path:url(#clipping-progress)] w-full h-full absolute [background:linear-gradient(to_right,rgb(59_130_246)_var(--progress),transparent_var(--progress))] {resetProgress
+                ? 'animate-progress-fast'
+                : 'animate-progress'}"
         />
         <PlayButton on:click={onPlayClick} {isPlaying} />
     </main>
@@ -101,8 +119,29 @@
         </clipPath>
         <clipPath id="clipping-bottom" clipPathUnits="objectBoundingBox">
             <path
-                d="M 0 0.4 C 0.1773075 0.39806 0.257 0.4 0.3125 0.4 C 0.3825 0.4 0.4 0 0.5 0 C 0.6 0 0.61875 0.4 0.6875 0.4 C 0.7885 0.4 1 0.4 1 0.4 L 1 1 L 0 1 Z"
+                d="M 0 0.4 C 0.1773075 0.39806 0.257 0.4 0.3125 0.4 C 0.3825 0.4 0.4 0 0.5 0 C 0.6 0 0.61875 0.4 0.6875 0.4 L 1 0.4 L 1 1 L 0 1 Z"
+            />
+        </clipPath>
+        <clipPath id="clipping-progress" clipPathUnits="objectBoundingBox">
+            <path
+                d="M 0 0.4 C 0.177 0.398 0.257 0.4 0.313 0.4 C 0.383 0.4 0.4 0 0.5 0 C 0.6 0 0.619 0.4 0.688 0.4 L 1 0.4 L 1 0.45 C 1 0.45 0.878 0.45 0.688 0.45 C 0.6 0.45 0.6 0.05 0.5 0.06 C 0.4 0.05 0.4 0.45 0.313 0.45 L 0 0.45 L 0 0.4 Z"
             />
         </clipPath>
     </defs>
 </svg>
+
+<style>
+    @property --progress {
+        syntax: "<percentage>";
+        inherits: false;
+        initial-value: 0%;
+    }
+
+    .animate-progress {
+        transition: --progress 300ms linear;
+    }
+
+    .animate-progress-fast {
+        transition: --progress 100ms linear;
+    }
+</style>

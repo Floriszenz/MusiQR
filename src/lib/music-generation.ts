@@ -174,6 +174,30 @@ function chooseInstrument(instrumentId: number) {
     }
 }
 
+export class Metronome {
+    static INTERVAL_LENGTH = 200;
+
+    #totalSeconds: number;
+    #intervalHandle: number | undefined = undefined;
+
+    constructor(totalSeconds: number) {
+        this.#totalSeconds = totalSeconds;
+    }
+
+    start(callback: (progress: number) => void) {
+        this.#intervalHandle = setInterval(() => {
+            const currentSeconds = Tone.Transport.seconds;
+            const progress = (currentSeconds % this.#totalSeconds) / this.#totalSeconds;
+
+            callback(Number(progress.toPrecision(2)));
+        }, Metronome.INTERVAL_LENGTH) as unknown as number;
+    }
+
+    stop() {
+        clearInterval(this.#intervalHandle);
+    }
+}
+
 export async function generateMusic(song: MusiQRSong) {
     const instrument = chooseInstrument(song.instrument);
     let time = 0;
@@ -195,6 +219,8 @@ export async function generateMusic(song: MusiQRSong) {
     part.loopEnd = time;
 
     Tone.Transport.bpm.value = song.bpm;
+
+    return new Metronome(time);
 }
 
 export function startMusic() {
