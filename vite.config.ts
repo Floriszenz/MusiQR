@@ -32,6 +32,11 @@ export default defineConfig({
                     },
                 ],
             },
+            workbox: {
+                globPatterns: ["**/*.{js,css,html,svg,ogg}"],
+                globIgnores: ["**/node_modules/**/*", "server/**/*"],
+                navigateFallbackDenylist: [/^\/play/],
+            },
         }),
     ],
 });
