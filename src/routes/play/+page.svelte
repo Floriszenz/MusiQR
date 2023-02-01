@@ -51,7 +51,7 @@
             if (songParam && isMusiQRCode(songParam)) {
                 const song = MusiQRSong.fromMusiQRCode(songParam);
 
-                await generateMusic(song);
+                $metronome = await generateMusic(song);
             } else {
                 goBack();
             }
