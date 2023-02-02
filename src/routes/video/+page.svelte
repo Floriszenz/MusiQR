@@ -121,7 +121,7 @@
             alert("Could not detect any QR code");
         }
 
-        animationHandle = requestAnimationFrame(drawVideoFrame);
+        animationHandle = requestAnimationFrame(() => drawVideoFrame());
     }
 
     onMount(async () => {
