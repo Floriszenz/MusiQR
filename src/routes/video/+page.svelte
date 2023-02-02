@@ -93,6 +93,28 @@
                 ctx.lineTo(bottomLeft.x, bottomLeft.y);
                 ctx.closePath();
                 ctx.stroke();
+
+                // For debug only
+                ctx.strokeRect(10, 10, 20, 20);
+                ctx.fillRect(40, 10, 20, 20);
+                ctx.beginPath();
+                ctx.moveTo(70, 10);
+                ctx.lineTo(90, 10);
+                ctx.lineTo(90, 30);
+                ctx.lineTo(70, 30);
+                ctx.closePath();
+                ctx.stroke();
+
+                const { x, y } = topLeft;
+                ctx.strokeRect(x + 10, y + 10, 20, 20);
+                ctx.fillRect(x + 40, y + 10, 20, 20);
+                ctx.beginPath();
+                ctx.moveTo(x + 70, y + 10);
+                ctx.lineTo(x + 90, y + 10);
+                ctx.lineTo(x + 90, y + 30);
+                ctx.lineTo(x + 70, y + 30);
+                ctx.closePath();
+                ctx.stroke();
             }
         } catch {
             // TODO: Sensible fallback logic
@@ -125,7 +147,7 @@
 <div
     bind:clientWidth={contentWidth}
     bind:clientHeight={contentHeight}
-    class="flex h-screen w-full flex-col items-center justify-between gap-4 bg-gradient-to-b from-slate-50 to-slate-400"
+    class="flex h-[100dvh] w-full flex-col items-center justify-between gap-4 bg-gradient-to-b from-slate-50 to-slate-400"
 >
     <header class="w-full min-h-[2rem] relative z-10 text-white">
         <div

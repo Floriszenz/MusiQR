@@ -92,7 +92,7 @@
 <div
     bind:clientWidth={contentWidth}
     bind:clientHeight={contentHeight}
-    class="flex h-screen w-full flex-col items-center justify-between gap-4 bg-gradient-to-b from-slate-50 to-slate-400"
+    class="flex h-[100dvh] w-full flex-col items-center justify-between gap-4 bg-gradient-to-b from-slate-50 to-slate-400"
 >
     <header class="w-full min-h-[2rem] relative z-10 text-white">
         <div
