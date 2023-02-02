@@ -65,11 +65,18 @@
         };
 
         ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+        ctx.fillRect(10, 10, 20, 20);
+
         ctx.drawImage(video, size.x, size.y, size.width, size.height);
+
+        ctx.fillRect(canvas.width - 30, 10, 20, 20);
 
         // Try to detect QR code
         try {
             const results = await detector.detect(canvas);
+
+            ctx.fillRect(10, 50, 20, 20);
 
             if (results.length > 0) {
                 // TODO: Handle case of multiple detected codes
@@ -120,6 +127,8 @@
             // TODO: Sensible fallback logic
             alert("Could not detect any QR code");
         }
+
+        ctx.fillRect(canvas.width - 30, 50, 20, 20);
 
         animationHandle = requestAnimationFrame(() => drawVideoFrame());
     }
