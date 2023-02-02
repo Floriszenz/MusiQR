@@ -75,7 +75,7 @@
         (async () => {
             // Try to detect QR code
             try {
-                const results = await detector.detect(canvas);
+                const results = await detector.detect(video);
 
                 ctx.fillRect(10, 50, 20, 20);
 
@@ -148,7 +148,7 @@
             const BarcodeDetector = await initBarcodeDetector();
             detector = new BarcodeDetector();
 
-            ctx = canvas.getContext("2d", { willReadFrequently: true })!;
+            ctx = canvas.getContext("2d")!;
 
             drawVideoFrame();
         } catch {}
