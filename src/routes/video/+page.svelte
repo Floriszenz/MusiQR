@@ -17,6 +17,8 @@
     let video: HTMLVideoElement;
     let animationHandle: number;
 
+    let _boxInfoContainer: HTMLDivElement;
+
     function goBack() {
         cancelAnimationFrame(animationHandle);
         video.pause();
@@ -62,6 +64,7 @@
             height: canvas.height * scaleFactor.y,
         };
 
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
         ctx.drawImage(video, size.x, size.y, size.width, size.height);
 
         // Try to detect QR code
@@ -76,6 +79,10 @@
                 if (isMusiQRCode(result.rawValue)) {
                     musiQrCode = result.rawValue;
                 }
+
+                _boxInfoContainer.textContent = `
+                    { (${topLeft.x},${topLeft.y}), (${topRight.x},${topRight.y}), (${bottomRight.x},${bottomRight.y}), (${bottomLeft.x},${bottomLeft.y}) }
+                `.trim();
 
                 ctx.strokeStyle = "red";
                 ctx.lineWidth = 4;
@@ -128,6 +135,7 @@
         <div class="w-full h-full relative px-1 py-0.5">
             <BackButton on:click={goBack} />
         </div>
+        <div bind:this={_boxInfoContainer} class="text-black" />
     </header>
     <canvas bind:this={canvas} class="absolute" width={contentWidth} height={contentHeight} />
     <!-- svelte-ignore a11y-media-has-caption -->
