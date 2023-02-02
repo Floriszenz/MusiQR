@@ -75,7 +75,11 @@
         (async () => {
             // Try to detect QR code
             try {
-                const results = await detector.detect(video);
+                const results = await detector.detect(canvas);
+
+                if ("reset" in ctx) {
+                    (ctx.reset as () => void)();
+                }
 
                 ctx.fillRect(10, 50, 20, 20);
 
