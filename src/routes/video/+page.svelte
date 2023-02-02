@@ -148,7 +148,7 @@
             const BarcodeDetector = await initBarcodeDetector();
             detector = new BarcodeDetector();
 
-            ctx = canvas.getContext("2d")!;
+            ctx = canvas.getContext("2d", { desynchronized: true, willReadFrequently: true })!;
 
             drawVideoFrame();
         } catch {}
