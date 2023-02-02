@@ -45,7 +45,7 @@
         await goto("/play");
     }
 
-    async function drawVideoFrame() {
+    function drawVideoFrame() {
         const scaleFactor = { x: 1, y: 1 };
         const imageAspectRatio = video.videoWidth / video.videoHeight;
         const canvasAspectRatio = canvas.width / canvas.height;
@@ -72,61 +72,63 @@
 
         ctx.fillRect(canvas.width - 30, 10, 20, 20);
 
-        // Try to detect QR code
-        try {
-            const results = await detector.detect(canvas);
+        (async () => {
+            // Try to detect QR code
+            try {
+                const results = await detector.detect(canvas);
 
-            ctx.fillRect(10, 50, 20, 20);
+                ctx.fillRect(10, 50, 20, 20);
 
-            if (results.length > 0) {
-                // TODO: Handle case of multiple detected codes
-                const result = results[0];
-                const [topLeft, topRight, bottomRight, bottomLeft] = result.cornerPoints;
+                if (results.length > 0) {
+                    // TODO: Handle case of multiple detected codes
+                    const result = results[0];
+                    const [topLeft, topRight, bottomRight, bottomLeft] = result.cornerPoints;
 
-                if (isMusiQRCode(result.rawValue)) {
-                    musiQrCode = result.rawValue;
-                }
+                    if (isMusiQRCode(result.rawValue)) {
+                        musiQrCode = result.rawValue;
+                    }
 
-                _boxInfoContainer.textContent = `
+                    _boxInfoContainer.textContent = `
                     { (${topLeft.x},${topLeft.y}), (${topRight.x},${topRight.y}), (${bottomRight.x},${bottomRight.y}), (${bottomLeft.x},${bottomLeft.y}) }
                 `.trim();
 
-                ctx.strokeStyle = "red";
-                ctx.lineWidth = 4;
-                ctx.beginPath();
-                ctx.moveTo(topLeft.x, topLeft.y);
-                ctx.lineTo(topRight.x, topRight.y);
-                ctx.lineTo(bottomRight.x, bottomRight.y);
-                ctx.lineTo(bottomLeft.x, bottomLeft.y);
-                ctx.closePath();
-                ctx.stroke();
+                    ctx.strokeStyle = "red";
+                    ctx.lineWidth = 4;
+                    ctx.beginPath();
+                    ctx.moveTo(topLeft.x, topLeft.y);
+                    ctx.lineTo(topRight.x, topRight.y);
+                    ctx.lineTo(bottomRight.x, bottomRight.y);
+                    ctx.lineTo(bottomLeft.x, bottomLeft.y);
+                    ctx.closePath();
+                    ctx.stroke();
 
-                // For debug only
-                ctx.strokeRect(10, 10, 20, 20);
-                ctx.fillRect(40, 10, 20, 20);
-                ctx.beginPath();
-                ctx.moveTo(70, 10);
-                ctx.lineTo(90, 10);
-                ctx.lineTo(90, 30);
-                ctx.lineTo(70, 30);
-                ctx.closePath();
-                ctx.stroke();
+                    // For debug only
+                    ctx.strokeRect(10, 10, 20, 20);
+                    ctx.fillRect(40, 10, 20, 20);
+                    ctx.beginPath();
+                    ctx.moveTo(70, 10);
+                    ctx.lineTo(90, 10);
+                    ctx.lineTo(90, 30);
+                    ctx.lineTo(70, 30);
+                    ctx.closePath();
+                    ctx.stroke();
 
-                const { x, y } = topLeft;
-                ctx.strokeRect(x + 10, y + 10, 20, 20);
-                ctx.fillRect(x + 40, y + 10, 20, 20);
-                ctx.beginPath();
-                ctx.moveTo(x + 70, y + 10);
-                ctx.lineTo(x + 90, y + 10);
-                ctx.lineTo(x + 90, y + 30);
-                ctx.lineTo(x + 70, y + 30);
-                ctx.closePath();
-                ctx.stroke();
+                    const { x, y } = topLeft;
+                    ctx.strokeRect(x + 10, y + 10, 20, 20);
+                    ctx.fillRect(x + 40, y + 10, 20, 20);
+                    ctx.beginPath();
+                    ctx.moveTo(x + 70, y + 10);
+                    ctx.lineTo(x + 90, y + 10);
+                    ctx.lineTo(x + 90, y + 30);
+                    ctx.lineTo(x + 70, y + 30);
+                    ctx.closePath();
+                    ctx.stroke();
+                }
+            } catch {
+                // TODO: Sensible fallback logic
+                alert("Could not detect any QR code");
             }
-        } catch {
-            // TODO: Sensible fallback logic
-            alert("Could not detect any QR code");
-        }
+        })();
 
         ctx.fillRect(canvas.width - 30, 50, 20, 20);
 
